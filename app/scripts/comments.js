@@ -24,7 +24,16 @@ var CommentList = React.createClass({
 		return React.createElement(
 			"div",
 			{ className: "commentList" },
-			"Hello, world! I am a CommentList."
+			React.createElement(
+				Comment,
+				{ author: "Peter Hunt" },
+				"This is one comment"
+			),
+			React.createElement(
+				Comment,
+				{ author: "Jordan Walke" },
+				"This is *another* comment"
+			)
 		);
 	}
 });
