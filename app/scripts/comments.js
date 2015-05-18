@@ -70,4 +70,4 @@ var CommentBox = React.createClass({
 	}
 });
 
-React.render(React.createElement(CommentBox, { data: data }), document.getElementById("content"));
+React.render(React.createElement(CommentBox, { url: "comments.json" }), document.getElementById("content"));
