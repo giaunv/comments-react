@@ -1,5 +1,7 @@
 "use strict";
 
+var data = [{ author: "Pete Hunt", text: "This is one comment" }, { author: "Jordan Walke", text: "This is *another* comment" }];
+
 var Comment = React.createClass({
 	displayName: "Comment",
 
@@ -22,19 +24,18 @@ var CommentList = React.createClass({
 	displayName: "CommentList",
 
 	render: function render() {
+		var commentNodes = this.props.data.map(function (comment) {
+			return React.createElement(
+				Comment,
+				{ author: comment.author },
+				comment.text
+			);
+		});
+
 		return React.createElement(
 			"div",
 			{ className: "commentList" },
-			React.createElement(
-				Comment,
-				{ author: "Peter Hunt" },
-				"This is one comment"
-			),
-			React.createElement(
-				Comment,
-				{ author: "Jordan Walke" },
-				"This is *another* comment"
-			)
+			commentNodes
 		);
 	}
 });
@@ -63,10 +64,10 @@ var CommentBox = React.createClass({
 				null,
 				"Comments"
 			),
-			React.createElement(CommentList, null),
+			React.createElement(CommentList, { data: this.props.data }),
 			React.createElement(CommentForm, null)
 		);
 	}
 });
 
-React.render(React.createElement(CommentBox, null), document.getElementById("content"));
+React.render(React.createElement(CommentBox, { data: data }), document.getElementById("content"));
