@@ -1,0 +1,26 @@
+{
+  "name": "comments-react",
+  "version": "0.0.0",
+  "authors": [
+    "Giau Ngo <giaunv@gmail.com>"
+  ],
+  "main": "app/scripts/comments.js",
+  "moduleType": [
+    "amd"
+  ],
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "jquery": "~2.1.4",
+    "react": "~0.13.3"
+  },
+  "install": {
+   "path": "vendors"
+  }
+}
