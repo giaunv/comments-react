@@ -1,7 +1,5 @@
 "use strict";
 
-var data = [{ author: "Pete Hunt", text: "This is one comment" }, { author: "Jordan Walke", text: "This is *another* comment" }];
-
 var Comment = React.createClass({
 	displayName: "Comment",
 
@@ -43,11 +41,25 @@ var CommentList = React.createClass({
 var CommentForm = React.createClass({
 	displayName: "CommentForm",
 
+	handleSubmit: function handleSubmit(e) {
+		e.preventDefault();
+		var author = React.findDOMNode(this.refs.author).value.trim();
+		var text = React.findDOMNode(this.refs.text).value.trim();
+		if (!text || !author) {
+			return;
+		}
+		// TODO: send request to the server
+		React.findDOMNode(this.refs.author).value = "";
+		React.findDOMNode(this.refs.text).value = "";
+		return;
+	},
 	render: function render() {
 		return React.createElement(
-			"div",
-			{ className: "commentForm" },
-			"Hello, world! I am a CommentForm."
+			"form",
+			{ className: "commentForm", onSubmit: this.handleSubmit },
+			React.createElement("input", { type: "text", placeholder: "Your name", ref: "author" }),
+			React.createElement("input", { type: "text", placeholder: "Say something...", ref: "text" }),
+			React.createElement("input", { type: "submit", value: "Post" })
 		);
 	}
 });

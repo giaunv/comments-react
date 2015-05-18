@@ -1,8 +1,3 @@
-var data = [
-	{author: "Pete Hunt", text: "This is one comment"},
-	{author: "Jordan Walke", text: "This is *another* comment"}
-];
-
 var Comment = React.createClass({
 	render: function() {
 		var rawMarkup = marked(this.props.children.toString(), {sanitize: true});
@@ -36,11 +31,25 @@ var CommentList = React.createClass({
 });
 
 var CommentForm = React.createClass({
+	handleSubmit: function(e){
+		e.preventDefault();
+		var author = React.findDOMNode(this.refs.author).value.trim();
+		var text = React.findDOMNode(this.refs.text).value.trim();
+		if (!text || !author) {
+			return;
+		}
+		// TODO: send request to the server
+		React.findDOMNode(this.refs.author).value = '';
+		React.findDOMNode(this.refs.text).value = '';
+		return;
+	},
 	render: function() {
 		return (
-			<div className="commentForm">
-				Hello, world! I am a CommentForm.
-			</div>
+			<form className="commentForm" onSubmit={this.handleSubmit}>
+				<input type="text" placeholder="Your name" ref="author"/>
+				<input type="text" placeholder="Say something..." ref="text"/>
+				<input type="submit" value="Post" />
+			</form>
 		);
 	}
 })
